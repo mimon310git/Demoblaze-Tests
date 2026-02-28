@@ -88,7 +88,7 @@ npm ci
 Install Playwright browsers:
 
 ```bash
-npx playwright install
+npx playwright install chromium
 ```
 
 ## Running Tests
@@ -99,7 +99,9 @@ Run the full suite:
 npx playwright test
 ```
 
-Run only Chromium:
+By default, the suite runs only on Chromium because the Playwright config contains a single browser project.
+
+Run the suite explicitly on Chromium:
 
 ```bash
 npx playwright test --project=chromium
@@ -127,11 +129,12 @@ npx playwright show-report
 
 ## Browser Strategy
 
-Primary execution target for this project is `Chromium`.
+This project runs on `Chromium` only.
 
 Reason:
 - Demoblaze is a public demo application and some scenarios are not stable across all browsers
 - the main goal of this project is stable functional coverage, not full cross-browser certification
+- the Playwright config is intentionally limited to a single browser project for more predictable local and CI runs
 
 ## Notes About Demoblaze
 
