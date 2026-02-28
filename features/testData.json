@@ -1,3 +1,52 @@
 {
-  "baseURL": "https://demoblaze.com/"
+  "baseURL": "https://demoblaze.com/",
+  "categories": {
+    "phones": "Phones",
+    "laptops": "Laptops",
+    "monitors": "Monitors"
+  },
+  "products": {
+    "laptopPrimary": "Sony vaio i5",
+    "laptopSecondary": "MacBook air",
+    "phonePrimary": "Samsung galaxy s6",
+    "phoneSecondary": "Nokia lumia 1520"
+  },
+  "orderData": {
+    "valid": {
+      "name": "John QA",
+      "country": "USA",
+      "city": "Boston",
+      "card": "4111111111111111",
+      "month": "12",
+      "year": "2028"
+    },
+    "invalid": {
+      "emptyName": {
+        "name": "",
+        "country": "USA",
+        "city": "Boston",
+        "card": "4111111111111111",
+        "month": "12",
+        "year": "2028"
+      },
+      "emptyCard": {
+        "name": "John QA",
+        "country": "USA",
+        "city": "Boston",
+        "card": "",
+        "month": "12",
+        "year": "2028"
+      }
+    }
+  },
+  "authData": {
+    "invalidLogin": {
+      "username": "invalid_user",
+      "password": "invalid_pass"
+    },
+    "existingSignup": {
+      "username": "existing_user",
+      "password": "Test1234"
+    }
+  }
 }

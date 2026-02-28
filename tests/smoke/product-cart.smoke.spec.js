@@ -11,9 +11,11 @@ test.describe("Product cart", () => {
   test("TC-SM-03 Open product detail", async ({ page }) => {
     await page.goto(testData.baseURL);
 
-    await page.getByRole("link", { name: "Sony vaio i5" }).click();
+    await page
+      .getByRole("link", { name: testData.products.laptopPrimary })
+      .click();
     await expect(
-      page.getByRole("heading", { name: "Sony vaio i5" }),
+      page.getByRole("heading", { name: testData.products.laptopPrimary }),
     ).toBeVisible();
     await expect(
       page.locator("strong", { hasText: "Product description" }),
@@ -26,10 +28,9 @@ test.describe("Product cart", () => {
 test("TC-SM-04 Add product to cart", async ({ page }) => {
   await page.goto(testData.baseURL);
 
-  await page.getByRole("link", { name: "Sony vaio i5" }).click();
-  await page.getByRole("link", { name: "Add to cart" }).click();
-
+  await page.getByRole("link", { name: testData.products.laptopPrimary }).click();
   const dialogPromise = page.waitForEvent("dialog");
+  await page.getByRole("link", { name: "Add to cart" }).click();
 
   const dialog = await dialogPromise;
   expect(dialog.message()).toContain("Product added");

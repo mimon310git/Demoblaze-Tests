@@ -10,9 +10,15 @@ test.describe("Browse", () => {
   test("TC-SM-01 Home page categories + products list", async ({ page }) => {
     await page.goto(testData.baseURL);
 
-    await expect(page.getByRole("link", { name: "Phones" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Laptops" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Monitors" })).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: testData.categories.phones }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: testData.categories.laptops }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: testData.categories.monitors }),
+    ).toBeVisible();
 
     const products = page.locator(".card-title a");
     await expect(products.first()).toBeVisible(); // wait on UI element
@@ -24,28 +30,28 @@ test.describe("Browse", () => {
     );
     productNames.forEach((name, i) => console.log(`${i + 1}. ${name}`));
 
-    expect(productNames).toContain("Samsung galaxy s6");
-    expect(productNames).toContain("Sony vaio i5");
+    expect(productNames).toContain(testData.products.phonePrimary);
+    expect(productNames).toContain(testData.products.laptopPrimary);
   });
 
   test("TC-SM-02 Filter by laptops", async ({ page }) => {
     await page.goto(testData.baseURL);
 
     const products = page.locator(".card-title a");
-    await expect(products.first()).toHaveText("Samsung galaxy s6"); // baseline on home
+    await expect(products.first()).toHaveText(testData.products.phonePrimary); // baseline on home
 
-    await page.getByRole("link", { name: "Laptops" }).click();
+    await page.getByRole("link", { name: testData.categories.laptops }).click();
 
     // wait until filter is applied
-    await expect(products.first()).toHaveText("Sony vaio i5");
+    await expect(products.first()).toHaveText(testData.products.laptopPrimary);
     await expect(
-      page.locator(".card-title a", { hasText: "Samsung galaxy s6" }),
+      page.locator(".card-title a", { hasText: testData.products.phonePrimary }),
     ).toHaveCount(0);
 
     const names = (await products.allTextContents()).map((t) => t.trim());
     console.log("Laptops:", names);
 
-    expect(names).toContain("Sony vaio i5");
-    expect(names).not.toContain("Samsung galaxy s6");
+    expect(names).toContain(testData.products.laptopPrimary);
+    expect(names).not.toContain(testData.products.phonePrimary);
   });
 });
