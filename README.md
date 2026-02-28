@@ -1,16 +1,22 @@
 # Demoblaze QA Automation Project
 
-End-to-end test automation project for `https://demoblaze.com/` built with Playwright.
+QA portfolio project for `https://demoblaze.com/` built with Playwright and JavaScript.
 
-The goal of this project is to present a small but realistic QA portfolio example:
-- user stories
-- manual test cases
-- automated smoke, regression, and negative scenarios
-- reusable test data in JSON
+The project combines manual QA documentation with automated UI coverage for the main Demoblaze flows. The goal is to show a practical testing workflow: define scope, write scenarios, automate core paths, and keep test data centralized.
 
-## Project Scope
+## What Is Included
 
-This project covers the main Demoblaze flows:
+- user stories for main store flows
+- manual test cases in table format
+- automated smoke tests
+- automated regression tests
+- selected negative scenarios
+- shared test data in JSON
+- GitHub Actions workflow for Playwright
+
+## Application Scope
+
+Covered business areas:
 - product browsing
 - category filtering
 - product detail
@@ -18,7 +24,7 @@ This project covers the main Demoblaze flows:
 - cart management
 - checkout
 - authentication modals
-- selected negative scenarios
+- selected validation and negative flows
 
 ## Tech Stack
 
@@ -47,14 +53,14 @@ tests/
 
 ## Documentation
 
-Project documentation is stored here:
+Manual QA artifacts:
 - `docs/user-stories.md`
 - `docs/test-cases.md`
 
-Shared test data is stored here:
+Shared test data:
 - `features/testData.json`
 
-## Automated Test Suites
+## Automated Coverage
 
 ### Smoke
 - `TC-SM-01` Home page categories and products list
@@ -85,40 +91,42 @@ Install dependencies:
 npm ci
 ```
 
-Install Playwright browsers:
+Install Playwright browser:
 
 ```bash
 npx playwright install chromium
 ```
 
-## Running Tests
+## Run Tests
 
-Run the full suite:
+Run all tests:
 
 ```bash
 npx playwright test
 ```
 
-By default, the suite runs only on Chromium because the Playwright config contains a single browser project.
-
-Run the suite explicitly on Chromium:
+Run only smoke tests:
 
 ```bash
-npx playwright test --project=chromium
+npx playwright test tests/smoke
 ```
 
-Run a specific suite:
+Run only regression tests:
 
 ```bash
-npx playwright test tests/smoke --project=chromium
-npx playwright test tests/regression --project=chromium
-npx playwright test tests/negative --project=chromium
+npx playwright test tests/regression
+```
+
+Run only negative tests:
+
+```bash
+npx playwright test tests/negative
 ```
 
 Run a specific file:
 
 ```bash
-npx playwright test tests/smoke/browse.smoke.spec.js --project=chromium
+npx playwright test tests/smoke/browse.smoke.spec.js
 ```
 
 Open the HTML report:
@@ -129,38 +137,41 @@ npx playwright show-report
 
 ## Browser Strategy
 
-This project runs on `Chromium` only.
+This project is configured to run on `Chromium` only.
 
 Reason:
-- Demoblaze is a public demo application and some scenarios are not stable across all browsers
-- the main goal of this project is stable functional coverage, not full cross-browser certification
-- the Playwright config is intentionally limited to a single browser project for more predictable local and CI runs
+- Demoblaze is a public demo application and some flows are unstable across browsers
+- the goal of this project is stable functional coverage, not cross-browser certification
+- keeping one browser in config makes local runs and CI results more predictable
 
 ## Notes About Demoblaze
 
-This application uses several native browser dialogs such as:
-- add to cart alerts
-- login and sign-up validation alerts
-- checkout validation alerts
+Demoblaze uses native browser dialogs for several actions, for example:
+- add to cart
+- login and sign-up validation
+- checkout validation
 
 Because of that, multiple tests use Playwright dialog handling instead of DOM-based message assertions.
 
 ## CI
 
-GitHub Actions workflow is available in:
+GitHub Actions workflow:
 - `.github/workflows/playwright.yml`
 
-## Current Status
+The workflow installs dependencies, installs Playwright browser binaries, and runs the Playwright suite.
 
-Current repository state:
-- documentation is prepared
+## Current State
+
+Current repository status:
+- manual documentation is prepared
 - test data is centralized in JSON
 - smoke and regression suites are implemented
-- negative suite is included, with some scenarios requiring stabilization because of demo-site behavior
+- negative coverage is included and can be extended further if needed
 
-## Possible Next Steps
+## Next Improvements
 
+Possible next steps for this project:
 - refactor repeated flows into Page Object Model
-- add bug reports document
-- add npm scripts for common Playwright commands
-- stabilize remaining flaky scenarios
+- add dedicated bug reports document
+- add `npm` scripts for common Playwright commands
+- improve flaky scenario handling on demo-site edge cases
