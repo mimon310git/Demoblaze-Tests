@@ -1,3 +1,5 @@
+![CI](https://github.com/mimon310git/Demoblaze-Tests/actions/workflows/playwright.yml/badge.svg)
+
 # Demoblaze QA Automation Project
 
 QA portfolio project for `https://demoblaze.com/` built with Playwright and JavaScript.
