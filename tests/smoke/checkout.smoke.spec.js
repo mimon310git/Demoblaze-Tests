@@ -1,8 +1,3 @@
-/**
- * Smoke test names
- * TC-SM-05 Place order with valid data
- */
-
 import { test, expect } from "@playwright/test";
 import testData from "../../features/testData.json";
 

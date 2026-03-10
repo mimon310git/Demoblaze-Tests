@@ -1,8 +1,3 @@
-/**
- * Regression test names
- * TC-RG-04 Category switching updates grid
- */
-
 import { test, expect } from "@playwright/test";
 import testData from "../../features/testData.json";
 

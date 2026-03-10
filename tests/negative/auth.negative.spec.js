@@ -1,8 +1,3 @@
-/**
- * Negative test names
- * TC-NG-03 Login with invalid credentials
- * TC-NG-04 Sign up with already existing username
- */
 import { test, expect } from "@playwright/test";
 import testData from "../../features/testData.json";
 

@@ -1,9 +1,3 @@
-/**
- * Smoke test names
- * TC-SM-03 Open product detail
- * TC-SM-04 Add product to cart
- */
-
 import { test, expect } from "@playwright/test";
 import testData from "../../features/testData.json";
 
@@ -28,7 +22,9 @@ test.describe("Product cart", () => {
 test("TC-SM-04 Add product to cart", async ({ page }) => {
   await page.goto(testData.baseURL);
 
-  await page.getByRole("link", { name: testData.products.laptopPrimary }).click();
+  await page
+    .getByRole("link", { name: testData.products.laptopPrimary })
+    .click();
   const dialogPromise = page.waitForEvent("dialog");
   await page.getByRole("link", { name: "Add to cart" }).click();
 

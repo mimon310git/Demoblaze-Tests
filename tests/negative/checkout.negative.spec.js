@@ -1,9 +1,3 @@
-/**
- * Negative test names
- * TC-NG-01 Checkout with empty Name
- * TC-NG-02 Checkout with empty Card
- */
-
 import { test, expect } from "@playwright/test";
 import testData from "../../features/testData.json";
 

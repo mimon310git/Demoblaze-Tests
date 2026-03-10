@@ -1,7 +1,3 @@
-/**
- * Negative test names
- * TC-NG-05 Repeated Add to cart clicks
- */
 import { test, expect } from "@playwright/test";
 import testData from "../../features/testData.json";
 

@@ -1,8 +1,3 @@
-/**
- * Smoke test names
- * TC-SM-01 Home page loads categories and products
- * TC-SM-02 Filter by laptops
- */
 import { test, expect } from "@playwright/test";
 import testData from "../../features/testData.json";
 
@@ -45,7 +40,9 @@ test.describe("Browse", () => {
     // wait until filter is applied
     await expect(products.first()).toHaveText(testData.products.laptopPrimary);
     await expect(
-      page.locator(".card-title a", { hasText: testData.products.phonePrimary }),
+      page.locator(".card-title a", {
+        hasText: testData.products.phonePrimary,
+      }),
     ).toHaveCount(0);
 
     const names = (await products.allTextContents()).map((t) => t.trim());
