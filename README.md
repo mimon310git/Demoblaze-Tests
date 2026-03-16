@@ -13,6 +13,7 @@ The project combines manual QA documentation with automated UI coverage for the 
 - automated smoke tests
 - automated regression tests
 - selected negative scenarios
+- additive Page Object Model examples
 - shared test data in JSON
 - GitHub Actions workflow for Playwright
 
@@ -45,9 +46,11 @@ features/
   testData.json
 
 tests/
-  smoke/
-  regression/
   negative/
+  pages/
+  pom/
+  regression/
+  smoke/
 
 .github/workflows/
   playwright.yml
@@ -85,6 +88,13 @@ Shared test data:
 - `TC-NG-04` Sign up with already existing username
 - `TC-NG-05` Repeated Add to cart clicks
 
+### POM Examples
+- `TC-POM-01` Home page categories and grid
+- `TC-POM-02` Open product detail
+- `TC-POM-03` Add product to cart dialog
+- `TC-POM-04` Open and close account modals
+- `TC-POM-05` Open place order modal
+
 ## Setup
 
 Install dependencies:
@@ -104,25 +114,31 @@ npx playwright install chromium
 Run all tests:
 
 ```bash
-npx playwright test
+npm test
 ```
 
 Run only smoke tests:
 
 ```bash
-npx playwright test tests/smoke
+npm run test:smoke
 ```
 
 Run only regression tests:
 
 ```bash
-npx playwright test tests/regression
+npm run test:regression
 ```
 
 Run only negative tests:
 
 ```bash
-npx playwright test tests/negative
+npm run test:negative
+```
+
+Run only POM tests:
+
+```bash
+npm run test:pom
 ```
 
 Run a specific file:
@@ -134,8 +150,18 @@ npx playwright test tests/smoke/browse.smoke.spec.js
 Open the HTML report:
 
 ```bash
-npx playwright show-report
+npm run report
 ```
+
+## POM Structure
+
+The project keeps the original smoke, regression, and negative suites unchanged.
+
+Additive POM coverage lives in:
+- `tests/pages/` for reusable page objects
+- `tests/pom/` for example tests that use those page objects
+
+This keeps the original suites readable while also showing a Page Object Model implementation.
 
 ## Browser Strategy
 
@@ -169,11 +195,12 @@ Current repository status:
 - test data is centralized in JSON
 - smoke and regression suites are implemented
 - negative coverage is included and can be extended further if needed
+- additive Page Object Model examples are included in `tests/pages/` and `tests/pom/`
+- npm scripts are available for the main suites and POM examples
 
 ## Next Improvements
 
 Possible next steps for this project:
-- refactor repeated flows into Page Object Model
 - add dedicated bug reports document
-- add `npm` scripts for common Playwright commands
 - improve flaky scenario handling on demo-site edge cases
+- expand POM coverage if needed without replacing the original suites
